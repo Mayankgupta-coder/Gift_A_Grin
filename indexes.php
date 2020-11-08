@@ -44,10 +44,10 @@ while($row=mysqli_fetch_assoc($cat_res)){
   <nav id="sidebar-wrapper">
     <ul class="sidebar-nav">
       <li class="sidebar-brand">
-        <a class="js-scroll-trigger" href="#page-top"><img src="img/logo6.png" height="45px" width="150px"></a>
+        <a class="js-scroll-trigger" href="#page-top"><img src="img/logo4.png" height="40px" width="120px"></a>
       </li>
       <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="index.php">Home</a>
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
       </li>
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#about">About</a>
@@ -57,6 +57,9 @@ while($row=mysqli_fetch_assoc($cat_res)){
       </li>
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#products">Products</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="index.php">New Arrivals</a>
       </li>
       <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" href="#contact">Contact Us</a>
@@ -111,6 +114,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
           <h4>
             <strong><?php echo $list['categories']?></strong>
           </h4>
+		<h4><i class="fas fa-star"></i></h4>
           <!-- <p class="text-faded mb-0">This Diwali lighten up your home with these candles</p> -->
         </div>
         
@@ -190,7 +194,8 @@ while($row=mysqli_fetch_assoc($cat_res)){
     <div class="container">
       
       <p class="text-light">Copyright &copy; 2020 Gift A Grin</p>
-      <p class="float-right">Images from Pixels and Pixabay</p>
+      <p class="float-right">Images from <a href="https://pixels.com/">Pixels</a> and <a href="https://pixabay.com/">Pixabay</a><br>
+      Created logo at <a href="https://logomakr.com/">LogoMakr.com</a></p>
     </div>
   </footer>
 
