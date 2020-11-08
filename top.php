@@ -46,7 +46,7 @@ $totalProduct=$obj->totalProduct();
                             <div class="col-md-7 col-lg-7 col-sm-5 col-xs-3">
                                 <nav class="main__menu__nav hidden-xs hidden-sm">
                                     <ul class="main__menu float-right">
-                                        <li class="drop"><a href="indexes.php">Home</a></li>
+                                        <li class="drop"><a href="index.php">Home</a></li>
                                         <?php
 										foreach($cat_arr as $list){
 											?>
@@ -61,7 +61,7 @@ $totalProduct=$obj->totalProduct();
                                 <div class="mobile-menu clearfix visible-xs visible-sm">
                                     <nav id="mobile_dropdown">
                                         <ul>
-                                            <li><a href="indexes.php">Home</a></li>
+                                            <li><a href="index.php">Home</a></li>
                                             <?php
 											foreach($cat_arr as $list){
 												?>
