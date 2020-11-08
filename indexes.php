@@ -168,7 +168,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
             <div class="col-lg-4 mr-auto text-center mb-5 mb-lg-0">
                 <i class="fas fa-envelope fa-3x text-muted rounded-circle"></i>
                 <!-- Make sure to change the email address in BOTH the anchor text and the link target below!-->
-                <a class="d-block text-white" href="mailto:contact@yourwebsite.com" class="mb-2">contact@yourwebsite.com</a>
+                <a class="d-block text-white" href="mailto:amritasoni1996@gmail.com" class="mb-2">amritasoni1996@gmail.com</a>
 
             </div>
             <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
