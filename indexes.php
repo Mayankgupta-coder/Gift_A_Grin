@@ -129,9 +129,10 @@ while($row=mysqli_fetch_assoc($cat_res)){
       <div class="row no-gutters">
       <?php
       $i=0;
-							$get_product=get_product($con,6);
-							foreach($get_product as $list){
-							?>
+      
+      $get_product=get_product($con,6,'','','','','yes');
+      foreach($get_product as $list){
+      ?>
         <div class="col-lg-4">
         <a class="portfolio-item" href="product.php?id=<?php echo $list['id']?>">
             <div class="caption">

@@ -1,0 +1,41 @@
+body{
+	background: url("img/bgr.jpg") center fixed no-repeat;
+    background-size: 100% 100%;
+	}
+	
+.container{ 
+	background:rgba(0,0,0,0.6); 
+	color:white;
+	padding:2.5rem;
+	font-size: 1.7rem; 
+	text-transform: capitalize;
+	} 
+	
+.container h1{
+	font-size:3rem;
+	text-align:center;
+	margin-top:0;
+	margin-bottom:1rem;
+	text-decoration: underline;
+	padding-bottom:1rem;
+	text-transform: uppercase;
+	}
+
+.container .btn{
+	font-size:1.8rem;
+	background-color:#34a3f3;
+	padding: 8px 12px;
+}
+.container .form-control {
+	margin:10px 0;
+	font-size: 1.8rem;
+	padding: 6px;
+}
+.container #button{
+	text-align: center;
+	margin-top: 18px;
+	padding: 10px;
+}
+.container .form-group ul li{
+ margin: 15px 0;
+}

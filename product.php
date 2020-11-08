@@ -99,7 +99,8 @@ if(isset($_GET['id'])){
                                     </div>
 									
                                 </div>
-								<a class="fr__btn" href="javascript:void(0)" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Add to cart</a>
+                                
+								<a class="fr__btn" href="Payment.php?id=<?php echo $get_product['0']['id']?>" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Buy Now</a>
                             </div>
                         </div>
                     </div>
