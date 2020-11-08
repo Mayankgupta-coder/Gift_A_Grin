@@ -85,7 +85,7 @@ if(isset($_GET['id'])){
 									
                                 </div>
                                 
-								<a class="fr__btn" href="Payment.php?id=<?php echo $get_product['0']['id']?>" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Buy Now</a>
+				<a class="fr__btn" href="Payment.php?id=<?php echo $get_product['0']['id']?>" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@ if(isset($_GET['id'])){
                     <div class="col-xs-12">
                         <!-- Start List And Grid View -->
                         <ul class="pro__details__tab" role="tablist">
-                            <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">description</a></li>
+                            <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
                         </ul>
                         <!-- End List And Grid View -->
                     </div>
