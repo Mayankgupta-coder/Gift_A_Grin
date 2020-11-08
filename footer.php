@@ -1,9 +1,9 @@
 <html>
-<footer class="footer text-center bg-dark">
+<footer class="footer text-center" style="background-color:rgb(0,0,0,0.7); color:white; padding:10px;">
     <div class="container">
       
-      <p class="text-light">Copyright &copy; 2020 Gift A Grin</p>
-      <p class="float-right">Images from Pixels and Pixabay</p>
+      <p style="color:white; padding:24px">Copyright &copy; 2020 Gift A Grin</p>
+      
     </div>
     
   </footer>

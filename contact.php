@@ -44,8 +44,8 @@ require('top.php');
                                 <i class="icon-envelope icons"></i>
                             </div>
                             <div class="address__details">
-                                <h2 class="ct__title">openning hour</h2>
-                                <p>666 5th Ave New York, NY, United </p>
+                                <h2 class="ct__title">Mail</h2>
+				    <p><a href="mailto:amritasoni1996@gmail.com">amritasoni1996@gmail.com</a></p>
                             </div>
                         </div>
 
@@ -55,7 +55,7 @@ require('top.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">Phone Number</h2>
-                                <p>123-6586-587456</p>
+                                <p>+91 9818198016</p>
                             </div>
                         </div>
                     </div>      
