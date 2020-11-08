@@ -45,7 +45,7 @@ require('top.php');
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">Mail</h2>
-				    <p><a href="amritasoni1996@gmail.com">amritasoni1996@gmail.com</a></p>
+				    <p><a href="mailto:amritasoni1996@gmail.com">amritasoni1996@gmail.com</a></p>
                             </div>
                         </div>
 
