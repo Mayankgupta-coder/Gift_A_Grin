@@ -28,13 +28,10 @@ $totalProduct=$obj->totalProduct();
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/custom.css">
 	<script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <link rel="icon" href="img/favicon.png" type="image/gif" sizes="16x16">
 </head>
 <body>
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->  
-
-    <!-- Body main wrapper start -->
+    
     <div class="wrapper">
         <header id="htc__header" class="htc__header__area header--one">
             <div id="sticky-header-with-topbar" class="mainmenu__wrap sticky__header">
@@ -43,12 +40,12 @@ $totalProduct=$obj->totalProduct();
                         <div class="menumenu__container clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5"> 
                                 <div class="logo">
-                                     <a href="index.php"><img src="images/logo/4.png" alt="logo images"></a>
+                                     <a href="index.php"><img src="img/logo5.png" alt="logo images"></a>
                                 </div>
                             </div>
                             <div class="col-md-7 col-lg-7 col-sm-5 col-xs-3">
                                 <nav class="main__menu__nav hidden-xs hidden-sm">
-                                    <ul class="main__menu">
+                                    <ul class="main__menu float-right">
                                         <li class="drop"><a href="indexes.php">Home</a></li>
                                         <?php
 										foreach($cat_arr as $list){
@@ -77,7 +74,7 @@ $totalProduct=$obj->totalProduct();
                                     </nav>
                                 </div>  
                             </div>
-                            <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
+                            <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4" >
                                 <div class="header__right">
 									<div class="header__search search search__open">
                                         <a href="#"><i class="icon-magnifier icons"></i></a>
@@ -104,8 +101,8 @@ $totalProduct=$obj->totalProduct();
             </div>
         </header>
 		<div class="body__overlay"></div>
-		<div class="offset__wrapper">
-            <div class="search__area">
+		<div class="offset__wrapper" >
+            <div class="search__area" style="background-color:rgb(82, 79, 79)">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
