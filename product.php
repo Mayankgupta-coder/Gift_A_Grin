@@ -26,13 +26,13 @@ if(isset($_GET['id'])){
             <div class="htc__product__details__top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                             <div class="htc__product__details__tab__content">
                                 <!-- Start Product Big Images -->
                                 <div class="product__big__images">
                                     <div class="portfolio-full-image tab-content">
                                         <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
-                                            <img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$get_product['0']['image']?>">
+                                            <img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$get_product['0']['image']?>" alt="Product image" height="500px" width="600px">
                                         </div>
                                     </div>
                                 </div>
@@ -40,9 +40,9 @@ if(isset($_GET['id'])){
                                 
                             </div>
                         </div>
-                        <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
-                            <div class="ht__product__dtl">
-                                <h2><?php echo $get_product['0']['name']?></h2>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 smt-40 xmt-40">
+                            <div class="ht__product__dtl" style="font-size:50px; font-weight:600;">
+                                <h2 style="font-size:38px; font-weight:500;"><?php echo $get_product['0']['name']?></h2>
                                 <ul  class="pro__prize">
                                     <li class="old__prize"><s><?php echo '₹'.$get_product['0']['mrp']?></s></li>
                                     <li><?php echo '₹'.$get_product['0']['price']?></li>
@@ -53,8 +53,8 @@ if(isset($_GET['id'])){
                                         <p><span>Availability:</span> In Stock</p>
                                     </div> -->
 									
-                                    <div class="sin__desc align--left">
-                                        <p><span>Categories:</span></p>
+                                    <div class="sin__desc align--left" style="font-size:50px; font-weight:600;">
+                                        <p><span>Category:</span></p>
                                         <ul class="pro__cat__list">
                                             <li><a href="#"><?php echo $get_product['0']['categories']?></a></li>
                                         </ul>
