@@ -44,6 +44,7 @@ ob_end_flush();
 							  
 							   <th width="2%">ID</th>
 							   <th width="10%">Product Name</th>
+							   <th width="10%">Order place at</th>
                                <th width="30%">First Name</th>
                                <th width="10%">Last Name</th>
 							  
@@ -66,6 +67,7 @@ ob_end_flush();
 							   
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['product_name']?></td>
+							   <td><?php echo $row['date']?></td>
                                <td><?php echo $row['first_name']?></td>
                                <td><?php echo $row['last_name']?></td>
 							   
