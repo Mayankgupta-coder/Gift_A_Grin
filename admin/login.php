@@ -1,16 +1,16 @@
 <?php
-require('connection.inc.php');
-require('functions.inc.php');
+require('connection.php');
+require('functions.php');
 $msg='';
 if(isset($_POST['submit'])){
-	$username=get_safe_value($con,$_POST['username']);
-	$password=get_safe_value($con,$_POST['password']);
-	$sql="select * from admin_users where username='$username' and password='$password'";
-	$res=mysqli_query($con,$sql);
-	$count=mysqli_num_rows($res);
-	if($count>0){
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+   
+	if($username=='gift' && $password=='123'){
+      session_start();
 		$_SESSION['ADMIN_LOGIN']='yes';
-		$_SESSION['ADMIN_USERNAME']=$username;
+      $_SESSION['ADMIN_USERNAME']=$username;
+      $_SESSION["login_time_stamp"] = time();
 		header('location:categories.php');
 		die();
 	}else{

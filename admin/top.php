@@ -1,6 +1,19 @@
 <?php
 require('connection.php');
 require('functions.php');
+session_start();
+if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
+
+}else{
+	header('location:login.php');
+	die();
+}
+if(time()-$_SESSION["login_time_stamp"] >3600)   
+    { 
+        session_unset(); 
+        session_destroy(); 
+        header("location:login.php"); 
+    } 
 ?>
 
 <html class="no-js" lang="">
@@ -34,7 +47,7 @@ require('functions.php');
    <body>
      
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">Gift_A_Grin</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -43,17 +56,20 @@ require('functions.php');
       <li class="nav-item active">
         <a class="nav-link" href="categories.php">Categories<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="product.php">Product</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="order.php">Order</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="users.php">Users</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="contact_us.php">Contact Us</a>
+      <li class="nav-item active">
+        <a class="nav-link " href="contact_us.php">Contact Us</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="logout.php">Logout</a>
       </li>
     </ul>
   </div>
