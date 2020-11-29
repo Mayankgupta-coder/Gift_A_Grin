@@ -8,7 +8,14 @@ require('top.php');
                 <div class="row">
                     <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                         <div class="map-contacts--2">
-                            <div id="googleMap"></div>
+                            <div id="googleMap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.974989066042!2d77.43811411455954!3d28.63051169092439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee3b73900165%3A0x16607205a655c99!2sMilano%20Tower%2C%20Mahagun%20Mascot!5e0!3m2!1sen!2sus!4v1605009703171!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                <br />
+                <small>
+                <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.974989066042!2d77.43811411455954!3d28.63051169092439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee3b73900165%3A0x16607205a655c99!2sMilano%20Tower%2C%20Mahagun%20Mascot!5e0!3m2!1sen!2sus!4v1605009703171!5m2!1sen!2sus" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></a>
+                </small>
+            </div>
+            
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
@@ -79,8 +86,8 @@ require('top.php');
         </section>
         <!-- End Contact Area -->
 		<!-- Google Map js -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo "></script>
-    <script src="js/contact-map.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo "></script>
+    <script src="js/contact-map.js"></script> -->
     <script>
         // When the window has finished loading create our google map below
         google.maps.event.addDomListener(window, 'load', init);

@@ -1,7 +1,48 @@
 <?php
 require('connection.inc.php');
 require('functions.inc.php');
+include('Mobile_Detect.php');
+include('BrowserDetection.php');
+// include('track.php');
+if(isset($_COOKIE['visits']))
+{
 
+}
+else{
+    setcookie('visits','yes',time()+(60*60*24*30));
+    mysqli_query($con,"update visitors_count set count=count+1");
+}
+$browser=new Wolfcast\BrowserDetection;
+
+$browser_name=$browser->getName();
+$browser_version=$browser->getVersion();
+
+$detect=new Mobile_Detect();
+
+if($detect->isMobile()){
+	$type='Mobile';
+}elseif($detect->isTablet()){
+	$type='Tablet';
+}else{
+	$type='PC';
+}
+
+if($detect->isiOS()){
+	$os='IOS';
+}elseif($detect->isAndroidOS()){
+	$os='Android';
+}else{
+	$os='Window';
+}
+
+$url=(isset($_SERVER['HTTPS'])) ? "https":"http";
+$url.="//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$ref='';
+if(isset($_SERVER['HTTP_REFERER'])){
+	$ref=$_SERVER['HTTP_REFERER'];
+}
+$sql="insert into visitor(browser_name,browser_version,type,os,url,ref) values('$browser_name','$browser_version','$type','$os','$url','$ref')";
+mysqli_query($con,$sql);
 $cat_res=mysqli_query($con,"select * from categories where status=1 order by categories asc");
 $cat_arr=array();
 while($row=mysqli_fetch_assoc($cat_res)){
@@ -182,10 +223,10 @@ while($row=mysqli_fetch_assoc($cat_res)){
 
   <!-- Map -->
   <div class="map">
-    <iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.974989066042!2d77.43811411455954!3d28.63051169092439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee3b73900165%3A0x16607205a655c99!2sMilano%20Tower%2C%20Mahagun%20Mascot!5e0!3m2!1sen!2sus!4v1605009703171!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     <br />
     <small>
-      <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
+      <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.974989066042!2d77.43811411455954!3d28.63051169092439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee3b73900165%3A0x16607205a655c99!2sMilano%20Tower%2C%20Mahagun%20Mascot!5e0!3m2!1sen!2sus!4v1605009703171!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0""></a>
     </small>
   </div>
 

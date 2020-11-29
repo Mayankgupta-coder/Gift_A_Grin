@@ -1,6 +1,16 @@
 <?php 
-require('connection.inc.php');
+session_start();
 require('functions.inc.php');
+
+
+$con=mysqli_connect("localhost","root","","ecommerce");
+define('SERVER_PATH',$_SERVER['DOCUMENT_ROOT'].'/Gift A Grin/admin/');
+define('SITE_PATH','http://127.0.0.1/Gift A Grin/admin/');
+
+define('PRODUCT_IMAGE_SERVER_PATH',SERVER_PATH.'payments/product/');
+define('PRODUCT_IMAGE_SITE_PATH',SITE_PATH.'payments/product/');
+
+
 $msg='';
 $pname='';
 	$fname='';
@@ -14,24 +24,23 @@ $pname='';
     $amount='';
 	$total='';
 	$image='';
+	
 if(isset($_GET['id'])){
 	$product_id=mysqli_real_escape_string($con,$_GET['id']);
 	if($product_id>0){
 		$get_product=get_product($con,'','',$product_id);
-	}else{
-		?>
-		<script>
-		window.location.href='index.php';
-		</script>
-		<?php
 	}
-}else{
-	?>
-	<script>
-	window.location.href='index.php';
-	</script>
-	<?php
+	
 }
+if(isset($_POST['submitpay']))
+{
+    
+    $_SESSION['quantity']=$_POST['quantity'];
+    
+    $totalamt=$_SESSION['quantity']*$get_product['0']['price'];
+}
+    
+
 
 ?>
 <?php
@@ -45,9 +54,9 @@ if(isset($_POST['submit'])){
 	$adress=get_safe_value($con,$_POST['adress']);
 	$city=get_safe_value($con,$_POST['city']);
 	$state=get_safe_value($con,$_POST['state']);
-    $qty=get_safe_value($con,$_POST['quantity']);
-    $amount=$get_product['0']['price'];
-	$total=$qty*$amount;
+    $qty=$_SESSION['quantity'];
+    // $amount=$get_product['0']['price'];
+	$total=$_SESSION['quantity']*$get_product['0']['price'];
 	// $image=get_safe_value($con,$_POST['image']);
     
 	if(isset($_GET['id']) && $_GET['id']==0){
@@ -66,14 +75,64 @@ if(isset($_POST['submit'])){
 		$image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
 			move_uploaded_file($_FILES['image']['tmp_name'],PRODUCT_IMAGE_SERVER_PATH.$image);
             mysqli_query($con,"insert into `buyers_info`(product_name,first_name,last_name,phone,email,address,city,state,quantity,total,image) values('$pname','$fname','$lname','$phone','$email','$adress','$city','$state','$qty','$total','$image')");
-            echo '<div class="alert alert-success alert-dismissible" role="alert">
+			
+			echo '<div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <p>payment  done successfully</p>
-        </div>';
+		</div>';
+		
+		$body = "<h4>Product Name:".$pname."<br>First Name: ".$fname."<br>Last Name:".$lname."<br>total".$total."<br>Payment SS: ".$image."</h4>";
+		$body1 = "<h4>Product Name:".$pname."<br>First Name: ".$fname."<br>Last Name:".$lname."<br>total".$total."<br>Payment SS: ".$image."</h4>";
+		$url = 'https://smartmenu.pythonanywhere.com/mail?from=noreply.jumblejuggle@gmail.com&to='.$email.'&subject=Message from giftagrin&body=You got some message&html='.$body;
+		$url2 = 'https://smartmenu.pythonanywhere.com/mail?from=noreply.jumblejuggle@gmail.com&to=mynkgpt16@gmail.com&subject=Message from giftagrin&body=You got some message&html='.$body1;
+		?>
+		
+		<script>
+			async function getData(url) {
+			  const response = await fetch(url, {
+			    method: 'GET',
+			    mode: 'no-cors',
+			    cache: 'no-cache',
+			    credentials: 'same-origin',
+			    headers: {
+			      'Content-Type': 'application/x-www-form-urlencoded',
+			    },
+			    redirect: 'follow',
+			    referrerPolicy: 'no-referrer',
+			  });
+			  return "done";
+			}
+		 getData('<?php echo($url) ?>');
+		 async function getData(url2) {
+			  const response = await fetch(url2, {
+			    method: 'GET',
+			    mode: 'no-cors',
+			    cache: 'no-cache',
+			    credentials: 'same-origin',
+			    headers: {
+			      'Content-Type': 'application/x-www-form-urlencoded',
+			    },
+			    redirect: 'follow',
+			    referrerPolicy: 'no-referrer',
+			  });
+			  return "done";
+			}
+     	getData('<?php echo($url2) ?>');
+ </script>
+ 
+	
+	<script>
+	
+setTimeout(function(){
+            window.location.href = 'product.php?id=<?php echo $get_product['0']['id']?>';
+         }, 3000);
+	</script>
+	<?php	
 	}
     
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -203,6 +262,8 @@ if(isset($_POST['submit'])){
 								class="form-control"
 								id="inpquan"
 								name="quantity"
+								req value="<?php echo $_SESSION['quantity']?>"
+								disabled="disabled"
 								required
 							/>
 						</div>
@@ -217,7 +278,7 @@ if(isset($_POST['submit'])){
 								class="form-control"
 								id="inpam"
 								name="amount"
-                                required value="<?php echo $get_product['0']['price']?>"
+                                required value="<?php echo $_SESSION['quantity']*$get_product['0']['price']?>"
                                 disabled="disabled"
                                 
 							/>
@@ -269,3 +330,4 @@ if(isset($_POST['submit'])){
 		
     </body>
 </html>
+<?php require('footer_pay.php')?>

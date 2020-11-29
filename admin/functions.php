@@ -16,4 +16,16 @@ function get_safe_value($con,$str){
 		return mysqli_real_escape_string($con,$str);
 	}
 }
+function get_pdf($con,$order_id=''){
+	$sql="select image from buyers info where id=$order_id";
+	
+	//echo $sql;
+	$res=mysqli_query($con,$sql);
+	$data=array();
+	while($row=mysqli_fetch_assoc($res)){
+		$data[]=$row;
+	}
+	return $data;
+}
+
 ?>

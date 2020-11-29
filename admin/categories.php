@@ -12,7 +12,9 @@ if(isset($_GET['type']) && $_GET['type']!=''){
 			$status='0';
 		}
 		$update_status_sql="update categories set status='$status' where id='$id'";
+		$update_status="update product set status='$status' where categories_id='$id'";
 		mysqli_query($con,$update_status_sql);
+		mysqli_query($con,$update_status);
 	}
 	if($type=='delete'){
 		$id=get_safe_value($con,$_GET['id']);

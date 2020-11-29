@@ -63,6 +63,9 @@ if(time()-$_SESSION["login_time_stamp"] >3600)
         <a class="nav-link" href="order.php">Order</a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link" href="seo.php">SEO</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="users.php">Users</a>
       </li>
       <li class="nav-item active">

@@ -2,6 +2,14 @@
 require('connection.inc.php');
 require('functions.inc.php');
 require('add_to_cart.inc.php');
+if(isset($_COOKIE['visitss']))
+{
+    mysqli_query($con,"update visitors_count set count=0");
+}
+else{
+    setcookie('visitss','yes',time()+(60*60*24*30));
+    mysqli_query($con,"update visitors_count set count=count+1");
+}
 $cat_res=mysqli_query($con,"select * from categories where status=1 order by categories asc");
 $cat_arr=array();
 while($row=mysqli_fetch_assoc($cat_res)){
@@ -10,14 +18,32 @@ while($row=mysqli_fetch_assoc($cat_res)){
 
 $obj=new add_to_cart();
 $totalProduct=$obj->totalProduct();
+$script_name=$_SERVER['SCRIPT_NAME'];
+$script_name_arr=explode('/',$script_name);
+$mypage=$script_name_arr[count($script_name_arr)-1];
+
+$meta_title="GIFT A GRIN";
+$meta_desc="GIFT A GRIN";
+$meta_keyword="GIFT A GRIN";
+if($mypage=='product.php'){
+	$product_id=get_safe_value($con,$_GET['id']);
+	$product_meta=mysqli_fetch_assoc(mysqli_query($con,"select * from product where id='$product_id'"));
+	$meta_title=$product_meta['name'];
+	$meta_desc=$product_meta['meta_desc'];
+	$meta_keyword=$product_meta['meta_keyword'];
+}if($mypage=='contact.php'){
+	$meta_title='Contact Us';
+}
+
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Gift A Grin</title>
-    <meta name="description" content="">
+    <title><?php echo $meta_title?></title>
+    <meta name="description" content="<?php echo $meta_desc?>">
+	<meta name="keywords" content="<?php echo $meta_keyword?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/owl.carousel.min.css">

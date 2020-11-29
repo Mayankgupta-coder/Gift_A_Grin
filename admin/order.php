@@ -1,32 +1,24 @@
+
 <?php
 ob_start();
-require('top.php');
-
+require('top_order.php');
+require('fpdf.php');
 if(isset($_GET['type']) && $_GET['type']!=''){
 	$type=get_safe_value($con,$_GET['type']);
-	if($type=='status'){
-		$operation=get_safe_value($con,$_GET['operation']);
-		$id=get_safe_value($con,$_GET['id']);
-		if($operation=='active'){
-			$status='1';
-		}else{
-			$status='0';
-		}
-		$update_status_sql="update product set status='$status' where id='$id'";
-		mysqli_query($con,$update_status_sql);
-	}
+	
 	
 	if($type=='delete'){
 		$id=get_safe_value($con,$_GET['id']);
-		$delete_sql="delete from product where id='$id'";
+		$delete_sql="delete from buyers_info where id='$id'";
 		mysqli_query($con,$delete_sql);
 	}
 }
 
-$sql="select * from buyers_info";
+$sql="select * from buyers_info ORDER BY id";
 $res=mysqli_query($con,$sql);
 ob_end_flush();
 ?>
+
 <div class="content pb-0">
 	<div class="orders">
 	   <div class="row">
@@ -55,14 +47,18 @@ ob_end_flush();
                                <th width="7%">state</th>
                                <th width="7%">quantity req</th>
                                <th width="7%">total amount</th>
-                               <th width="30%">Payment SS</th>
-							   
+                               <th width="125px">Payment SS</th>
+							   <th width="30%">order Delivered</th>
 							</tr>
 						 </thead>
+						 
 						 <tbody>
 							<?php 
 							$i=1;
-							while($row=mysqli_fetch_assoc($res)){?>
+							while($row=mysqli_fetch_assoc($res)){
+								$order_id=mysqli_real_escape_string($con,$row['id']);
+								
+								?>
 							<tr>
 							   
 							   <td><?php echo $row['id']?></td>
@@ -79,6 +75,13 @@ ob_end_flush();
 							   <td><?php echo $row['quantity']?></td>
                                <td><?php echo $row['total']?></td>
                                <td><img src="<?php echo PRODUCT_IMAGE_SITE_PATH.$row['image']?>"/></td>
+							   <td><a href="pdf.php?id=<?php echo $order_id?>"><button>PDF</button></a></td>
+							   <td>
+								<?php
+								echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>";
+								
+								?>
+							   </td>
 							</tr>
 							<?php } ?>
 						 </tbody>
@@ -89,4 +92,16 @@ ob_end_flush();
 		  </div>
 	   </div>
 	</div>
+	<script>
+							   function downloadPdf()
+							   {
+								   <?php
+								   
+								   $pdf = new FPDF(); 
+								   $pdf->AddPage();
+								   $pdf->Image('payments/product/145009471_9.jpg',0,0);
+								   $pdf->Output();
+								   ?>
+							   }
+							   </script>
 </div>

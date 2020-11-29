@@ -1,5 +1,40 @@
 <?php 
 require('top.php');
+include('Mobile_Detect.php');
+include('BrowserDetection.php');
+
+
+$browser=new Wolfcast\BrowserDetection;
+
+$browser_name=$browser->getName();
+$browser_version=$browser->getVersion();
+
+$detect=new Mobile_Detect();
+
+if($detect->isMobile()){
+	$type='Mobile';
+}elseif($detect->isTablet()){
+	$type='Tablet';
+}else{
+	$type='PC';
+}
+
+if($detect->isiOS()){
+	$os='IOS';
+}elseif($detect->isAndroidOS()){
+	$os='Android';
+}else{
+	$os='Window';
+}
+
+$url=(isset($_SERVER['HTTPS'])) ? "https":"http";
+$url.="//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$ref='';
+if(isset($_SERVER['HTTP_REFERER'])){
+	$ref=$_SERVER['HTTP_REFERER'];
+}
+$sql="insert into visitor(browser_name,browser_version,type,os,url,ref) values('$browser_name','$browser_version','$type','$os','$url','$ref')";
+mysqli_query($con,$sql);
 if(isset($_GET['id'])){
 	$product_id=mysqli_real_escape_string($con,$_GET['id']);
 	if($product_id>0){
@@ -18,6 +53,8 @@ if(isset($_GET['id'])){
 	</script>
 	<?php
 }
+    
+
 ?>
 
         <!-- Start Product Details Area -->
@@ -63,13 +100,19 @@ if(isset($_GET['id'])){
                                    </div>
 									
                                 </div>
+                              
+                               <form method="post" action="Payment.php?id=<?php echo $get_product['0']['id']?>">
+                               <input type="text" placeholder="enter quantity" name="quantity">
+                               <button class="fr__btn" type="submit" name="submitpay">BUY PRODUCT</button>
+                               </form>
                                 
-				<a class="fr__btn" href="Payment.php?id=<?php echo $get_product['0']['id']?>" onclick="manage_cart('<?php echo $get_product['0']['id']?>','add')">Buy Now</a>
+				
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- End Product Details Top -->
         </section>
         <!-- End Product Details Area 
@@ -80,18 +123,22 @@ if(isset($_GET['id'])){
                     <div class="col-xs-12">
                         <!-- Start List And Grid View -->
                         <ul class="pro__details__tab" role="tablist">
-                            <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
+                            
+                        <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>&nbsp;
+                        <?php echo $get_product['0']['description']?>
                         </ul>
                         <!-- End List And Grid View -->
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
+                    
                         <div class="ht__pro__details__content">
                             <!-- Start Single Content -->
+                            
                             <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
                                 <div class="pro__tab__content__inner">
-                                    <?php echo $get_product['0']['description']?>
+                                   
                                 </div>
                             </div>
                             <!-- End Single Content -->
