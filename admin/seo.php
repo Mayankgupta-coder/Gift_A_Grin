@@ -5,6 +5,10 @@ require('top.php');
 
 $sql="select *,count(url) from visitor GROUP BY url,browser_name,type,os DESC";
 $res=mysqli_query($con,$sql);
+$myquery="select web_count from visitors_count";
+$result=mysqli_query($con,$myquery);
+    $num=mysqli_num_rows($result);
+    
 ?>
 <div class="content pb-0">
 	<div class="orders">
@@ -13,6 +17,7 @@ $res=mysqli_query($con,$sql);
 			 <div class="card">
 				<div class="card-body">
 				   <h4 class="box-title">SEO</h4>
+				   <?php echo "the count is".$num;?>
 				   
 				</div>
 				<div class="card-body--">

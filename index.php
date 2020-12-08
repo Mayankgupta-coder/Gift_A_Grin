@@ -4,13 +4,28 @@ require('functions.inc.php');
 include('Mobile_Detect.php');
 include('BrowserDetection.php');
 // include('track.php');
-if(isset($_COOKIE['visits']))
+if (!empty($_SERVER['HTTP_CLIENT_IP']))   
+  {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  }
+//whether ip is from proxy
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
+  {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+//whether ip is from remote address
+else
+  {
+    $ip = $_SERVER['REMOTE_ADDR'];
+  }
+// echo $ip;
+$myquery="select web_count from visitors_count where web_count='$ip'";
+$res=mysqli_query($con,$myquery);
+    $num=mysqli_num_rows($res);
+    
+if($num==0)
 {
-
-}
-else{
-    setcookie('visits','yes',time()+(60*60*24*30));
-    mysqli_query($con,"update visitors_count set count=count+1");
+    mysqli_query($con,"insert into visitors_count(web_count) values ('$ip')");
 }
 $browser=new Wolfcast\BrowserDetection;
 

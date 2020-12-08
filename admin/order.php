@@ -9,16 +9,75 @@ if(isset($_GET['type']) && $_GET['type']!=''){
 	
 	if($type=='delete'){
 		$id=get_safe_value($con,$_GET['id']);
+		$pname='';
+			$fname='';
+			$lname='';
+			$phone='';
+			$email='';
+			$adress='';
+			$city='';
+			$state='';
+			$qty='';
+			$total='';
+			$image='';
+		$sql="select * from buyers_info where id='$id'";
+		$result=mysqli_query($con,$sql);
+		$row=mysqli_fetch_assoc($result);
+			$pname=$row['product_name'];
+			$fname=$row['first_name'];
+			$lname=$row['last_name'];
+			$phone=$row['phone'];
+			$email=$row['email'];
+			$adress=$row['address'];
+			$city=$row['city'];
+			$state=$row['state'];
+			$qty=$row['quantity'];
+			$total=$row['total'];
+			$image='payments/product/'.$row['image'];
+		
+		if(mysqli_query($con,"insert into `selling_info`(product_name,first_name,last_name,phone,email,address,city,state,quantity,total,image) values('$pname','$fname','$lname','$phone','$email','$adress','$city','$state','$qty','$total','$image')"))
+		{
+			echo "success";
+		}
+		else{
+			echo $pname;
+		}
 		$delete_sql="delete from buyers_info where id='$id'";
 		mysqli_query($con,$delete_sql);
+		
 	}
 }
+$per_page=10;
+$current_page=1;
+$record=mysqli_num_rows(mysqli_query($con,"select * from buyers_info"));
+$page=ceil($record/$per_page);
+$start=1;
+if(isset($_GET['start'])){
+	$start=$_GET['start'];
+	$current_page=$start;
+	$start--;
+	$start=$start*$per_page;
+}
 
-$sql="select * from buyers_info ORDER BY id";
+$sql="select * from buyers_info ORDER BY id desc limit $start,$per_page";
 $res=mysqli_query($con,$sql);
 ob_end_flush();
 ?>
-
+<html>
+<style>
+.margin_button
+{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content: center;
+	flex-direction:row;
+}
+#my_button 
+{
+	margin:2px;
+}
+</style>
+<body>
 <div class="content pb-0">
 	<div class="orders">
 	   <div class="row">
@@ -85,6 +144,7 @@ ob_end_flush();
 							</tr>
 							<?php } ?>
 						 </tbody>
+						 
 					  </table>
 				   </div>
 				</div>
@@ -92,7 +152,71 @@ ob_end_flush();
 		  </div>
 	   </div>
 	</div>
-	<script>
+	
+	<div class="margin_button">
+	
+		<?php
+		$next=1;
+		$prev=1;
+		if(isset($_GET['next'])){
+			$next=$_GET['next'];
+		}
+		if(isset($_GET['start']))
+		{
+			$next=$_GET['start'];
+			$prev=$next;
+		}
+		?>
+		<?php
+		if($prev>1)
+		{
+			?>
+		<a href="?start=<?php echo $prev-1?>"> <button type="button" class="btn btn-dark" id="my_button">PREVIOUS</button></a>
+		<?php
+	   }?>
+	   <?php	
+	   if($prev==1)
+		{
+			?>
+		<a href="?start=<?php echo $page?>"> <button type="button" class="btn btn-dark" id="my_button">PREVIOUS</button></a>
+		<?php
+	   }?>	
+		<?php
+		
+			for($i=$next;$i<=$next+1;$i++)
+						 {
+							if($i<=$page)
+							{
+							$class='dark';
+							 if($current_page==$i)
+							 {
+								 $class='light';
+							 }
+							 ?>
+							
+							<a href="?start=<?php echo $i?>"><button type="button" class="btn btn-<?php echo $class?>" id="my_button"><?php echo $i ?></button></a>
+							
+						 <?php
+							}
+						}
+						?>
+						<?php
+						if($i<=$page+1)
+						{
+						?>
+						<a href="?start=<?php echo $i-1?>"> <button type="button" class="btn btn-dark" id="my_button">NEXT</button></a>
+					    <?php
+						}
+						else{
+							?>
+							<a href="?start=1"> <button type="button" class="btn btn-dark" id="my_button">NEXT</button></a>
+						<?php
+						}
+						?>
+						</div>
+
+						
+	<!-- <script>
 							   function downloadPdf()
 							   {
 								   <?php
@@ -103,5 +227,7 @@ ob_end_flush();
 								   $pdf->Output();
 								   ?>
 							   }
-							   </script>
+							   </script> -->
 </div>
+</body>
+</html>

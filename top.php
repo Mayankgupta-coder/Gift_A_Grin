@@ -2,13 +2,28 @@
 require('connection.inc.php');
 require('functions.inc.php');
 require('add_to_cart.inc.php');
-if(isset($_COOKIE['visitss']))
+if (!empty($_SERVER['HTTP_CLIENT_IP']))   
+  {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  }
+//whether ip is from proxy
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
+  {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+//whether ip is from remote address
+else
+  {
+    $ip = $_SERVER['REMOTE_ADDR'];
+  }
+// echo $ip;
+$myquery="select web_count from visitors_count where web_count='$ip'";
+$res=mysqli_query($con,$myquery);
+    $num=mysqli_num_rows($res);
+   
+if($num==0)
 {
-    mysqli_query($con,"update visitors_count set count=0");
-}
-else{
-    setcookie('visitss','yes',time()+(60*60*24*30));
-    mysqli_query($con,"update visitors_count set count=count+1");
+    mysqli_query($con,"insert into visitors_count(web_count) values ('$ip')");
 }
 $cat_res=mysqli_query($con,"select * from categories where status=1 order by categories asc");
 $cat_arr=array();
