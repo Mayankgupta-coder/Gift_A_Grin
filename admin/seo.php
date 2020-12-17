@@ -38,7 +38,7 @@ $result=mysqli_query($con,$myquery);
 							<?php 
 							$i=1;
 							while($row=mysqli_fetch_assoc($res)){?>
-							<tr>
+							<tr class="tablerow">
 							   
 							   <td><?php echo $row['browser_name']?></td>
 							   

@@ -23,6 +23,48 @@ if(isset($_GET['id']) && $_GET['id']!=''){
 	</script>
 	<?php
 }	
+$cat_id=mysqli_real_escape_string($con,$_GET['id']);
+
+$price_high_selected="";
+$price_low_selected="";
+$new_selected="";
+$old_selected="";
+$sort_order="";
+$name_descending_selected="";
+$name_ascending_selected="";
+if(isset($_GET['sort'])){
+	$sort=mysqli_real_escape_string($con,$_GET['sort']);
+	if($sort=="price_high"){
+		$sort_order=" order by product.price desc";
+		$price_high_selected="selected";	
+	}if($sort=="price_low"){
+		$sort_order=" order by product.price asc ";
+		$price_low_selected="selected";
+	}if($sort=="new"){
+		$sort_order=" order by product.id desc ";
+		$new_selected="selected";
+	}if($sort=="old"){
+		$sort_order=" order by product.id asc ";
+		$old_selected="selected";
+	}if($sort=="name_desc"){
+		$sort_order=" order by product.name desc ";
+		$name_descending_selected="selected";
+	}if($sort=="name_asc"){
+		$sort_order=" order by product.name asc ";
+		$name_ascending_selected="selected";
+	}
+
+}
+if($cat_id>0){
+	$get_product=get_product($con,'',$cat_id,'','',$sort_order);
+}else{
+	?>
+	<script>
+	window.location.href='index.php';
+	</script>
+	<?php
+}										
+
 $browser=new Wolfcast\BrowserDetection;
 
 $browser_name=$browser->getName();
@@ -56,6 +98,16 @@ if(isset($_SERVER['HTTP_REFERER'])){
 $sql="insert into visitor(browser_name,browser_version,type,os,url,ref) values('$browser_name','$browser_version','$type','$os','$url','$ref')";
 mysqli_query($con,$sql);									
 ?>
+<style>
+.divcol
+{
+	border:2px solid red;
+	background-color:black;
+}
+.ht__select {
+  background-color: yellow; 
+} 
+</style>
 <div class="body__overlay"></div>
         
         
@@ -65,7 +117,21 @@ mysqli_query($con,$sql);
 					<?php if(count($get_product)>0){?>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="htc__product__rightidebar">
-                            
+						<div class="htc__grid__top">
+                                <div class="htc__select__option divcol">
+									
+                                    <select class="ht__select" onchange="sort_product_drop('<?php echo $cat_id?>',' ')" id="sort_product_id">
+                                        <option value="">Default softing</option>
+                                        <option value="price_low" <?php echo $price_low_selected?>>Sort by price low to high</option>
+                                        <option value="price_high" <?php echo $price_high_selected?>>Sort by price high to low</option>
+										<option value="name_asc" <?php echo $name_ascending_selected?>>Sort by name in ascending order</option>
+										<option value="name_desc" <?php echo $name_descending_selected?>>Sort by name in descending order</option>
+                                        <option value="new" <?php echo $new_selected?>>Sort by new first</option>
+										<option value="old" <?php echo $old_selected?>>Sort by old first</option>
+                                    </select>
+                                </div>
+                               
+                            </div>
                             <!-- Start Product View -->
                             <div class="row">
                                 <div class="shop__grid__view__wrap">

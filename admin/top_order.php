@@ -50,6 +50,23 @@ if(time()-$_SESSION["login_time_stamp"] >3600)
       <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
       <link rel="stylesheet" href="assets/css/admin_style.css">
       <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+      <script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".tablerow").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+   <style>
+   #searchdiv
+   {
+      margin-left:15rem;
+      /* float:center; */
+   }
+   </style>
    </head>
    <body>
      
@@ -79,7 +96,11 @@ if(time()-$_SESSION["login_time_stamp"] >3600)
         <a class="nav-link" href="logout.php">Logout</a>
       </li>
     </ul>
+    <div id="searchdiv">
+  <input id="myInput" type="text" placeholder="Search..">
   </div>
+  </div>
+  
 </nav>
 </body>
 </html>

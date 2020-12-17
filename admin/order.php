@@ -118,7 +118,7 @@ ob_end_flush();
 								$order_id=mysqli_real_escape_string($con,$row['id']);
 								
 								?>
-							<tr>
+							<tr class="tablerow">
 							   
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['product_name']?></td>

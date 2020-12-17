@@ -50,7 +50,7 @@ $res=mysqli_query($con,$sql);
 							<?php 
 							$i=1;
 							while($row=mysqli_fetch_assoc($res)){?>
-							<tr>
+							<tr class="tablerow">
 							   <td class="serial"><?php echo $i?></td>
 							   <td><?php echo $row['id']?></td>
 							   <td><?php echo $row['categories']?></td>

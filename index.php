@@ -88,6 +88,23 @@ while($row=mysqli_fetch_assoc($cat_res)){
 
   <!-- Custom CSS -->
   <link href="css/stylish-portfolio.css" rel="stylesheet">
+  <style>
+  .scroll
+  {
+    min-width:100%;
+    height:100vh;
+  }
+  #contact
+  {
+    min-width:100%;
+    height:60vh;
+  }
+  .footer
+  {
+    min-width:100%;
+    height:30vh;
+  }
+  </style>
 
 </head>
 
@@ -124,7 +141,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </nav>
 
   <!-- Header -->
-  <header class="masthead d-flex">
+  <header class="masthead d-flex scroll">
     <div class="container text-center my-auto">
       <h1 class="mb-3">Crafting your imagination by our Hands</h1>
       <h4 class="mb-5">
@@ -136,7 +153,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </header>
 
   <!-- About -->
-  <section class="content-section" id="about">
+  <section class="content-section scroll" id="about">
     <div class="container text-center">
       <div class="row">
         <div class="col-lg-10 mx-auto">
@@ -153,7 +170,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </section>
 
   <!-- Categories -->
-  <section class="content-section bg-primary text-white text-center" id="services">
+  <section class="content-section bg-primary text-white text-center scroll" id="services">
     <div class="container">
       <div class="content-section-heading">
         <h3 class="text-light mb-1">Categories</h3>
@@ -179,7 +196,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </section>
 
   <!-- Portfolio -->
-  <section class="content-section" id="products">
+  <section class="content-section scroll" id="products">
     <div class="container">
       <div class="content-section-heading text-center">
         <h3 class="text-secondary mb-0">Products</h3>
@@ -212,7 +229,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </section>
 
   <!-- Call to Action -->
-  <section id="contact" class="content-section text-white">
+  <section id="contact" class="content-section text-white scroll">
     <div class="container text-center">
       <h3 class="mb-5">Contact Us</h3>
       
@@ -237,7 +254,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </section>
 
   <!-- Map -->
-  <div class="map">
+  <div class="map scroll">
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.974989066042!2d77.43811411455954!3d28.63051169092439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee3b73900165%3A0x16607205a655c99!2sMilano%20Tower%2C%20Mahagun%20Mascot!5e0!3m2!1sen!2sus!4v1605009703171!5m2!1sen!2sus" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     <br />
     <small>
@@ -246,7 +263,7 @@ while($row=mysqli_fetch_assoc($cat_res)){
   </div>
 
   <!-- Footer -->
-  <footer class="footer text-center bg-dark">
+  <footer class="footer text-center bg-dark scroll">
     <div class="container">
       
       <p class="text-light">Copyright &copy; 2020 Gift A Grin</p>
@@ -269,6 +286,15 @@ while($row=mysqli_fetch_assoc($cat_res)){
 
   <!-- Custom scripts for this template -->
   <script src="js/stylish-portfolio.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/1.0.21/jquery.scrollify.min.js" integrity="sha512-UyX8JsMsNRW1cYl8BoxpcamonpwU2y7mSTsN0Z52plp7oKo1u92Xqfpv6lOlTyH3yiMXK+gU1jw0DVCsPTfKew==" crossorigin="anonymous"></script>
+  <script>
+        $(function() {
+          $.scrollify({
+            section : ".scroll",
+            setHeights: false,
+          });
+        });
+      </script>
 
 </body>
 
