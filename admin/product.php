@@ -75,7 +75,7 @@ ob_end_flush();
 								echo "<span class='badge badge-edit'><a href='manage_product.php?id=".$row['id']."'>Edit</a></span>&nbsp;";
 								
 								echo "<span class='badge badge-delete'><a href='?type=delete&id=".$row['id']."'>Delete</a></span>";
-								
+								echo "<span class='badge badge-edit'><a href='multiimage.php?id=".$row['id']."'>upload image</a></span>&nbsp;";
 								?>
 							   </td>
 							</tr>

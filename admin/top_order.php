@@ -87,6 +87,9 @@ $(document).ready(function(){
         <a class="nav-link" href="order.php">Order</a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link" href="selling_info.php">Order Delivered</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" href="users.php">Users</a>
       </li>
       <li class="nav-item active">

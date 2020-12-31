@@ -2,135 +2,53 @@
 require('top.php');
 include('Mobile_Detect.php');
 include('BrowserDetection.php');
-
-
-
-if(isset($_GET['id']) && $_GET['id']!=''){
-	$cat_id=mysqli_real_escape_string($con,$_GET['id']);
-	if($cat_id>0){
-		$get_product=get_product($con,'',$cat_id);
-	}else{
-		?>
-		<script>
-		window.location.href='index.php';
-		</script>
-		<?php
-	}
-}else{
-	?>
-	<script>
-	window.location.href='index.php';
-	</script>
-	<?php
-}	
-$cat_id=mysqli_real_escape_string($con,$_GET['id']);
-
-$price_high_selected="";
-$price_low_selected="";
-$new_selected="";
-$old_selected="";
-$sort_order="";
-$name_descending_selected="";
-$name_ascending_selected="";
-if(isset($_GET['sort'])){
-	$sort=mysqli_real_escape_string($con,$_GET['sort']);
-	if($sort=="price_high"){
-		$sort_order=" order by product.price desc";
-		$price_high_selected="selected";	
-	}if($sort=="price_low"){
-		$sort_order=" order by product.price asc ";
-		$price_low_selected="selected";
-	}if($sort=="new"){
-		$sort_order=" order by product.id desc ";
-		$new_selected="selected";
-	}if($sort=="old"){
-		$sort_order=" order by product.id asc ";
-		$old_selected="selected";
-	}if($sort=="name_desc"){
-		$sort_order=" order by product.name desc ";
-		$name_descending_selected="selected";
-	}if($sort=="name_asc"){
-		$sort_order=" order by product.name asc ";
-		$name_ascending_selected="selected";
-	}
-
-}
-if($cat_id>0){
-	$get_product=get_product($con,'',$cat_id,'','',$sort_order);
-}else{
-	?>
-	<script>
-	window.location.href='index.php';
-	</script>
-	<?php
-}										
-
-$browser=new Wolfcast\BrowserDetection;
-
-$browser_name=$browser->getName();
-$browser_version=$browser->getVersion();
-
-$detect=new Mobile_Detect();
-
-if($detect->isMobile()){
-	$type='Mobile';
-}elseif($detect->isTablet()){
-	$type='Tablet';
-}else{
-	$type='PC';
+$get_product='';
+if(isset($_POST['submit_checkbox'])){
+    if(!empty($_POST['checkArr'])){
+    // foreach($_POST['checkArr'] as $checked){
+    //   echo $checked."</br>";
+    // }
+    $id1=$_POST['checkArr']['0'];
+    $id2=$_POST['checkArr']['1'];
+    // echo $_POST['checkArr']['0'];
+    // echo $_POST['checkArr']['1'];
+    
+  }
+  $get_product=get_product($con,'','','','','','',$id1,$id2);
 }
 
-if($detect->isiOS()){
-	$os='IOS';
-}elseif($detect->isAndroidOS()){
-	$os='Android';
-}else{
-	$os='Window';
-}
 
-$url=(isset($_SERVER['HTTPS'])) ? "https":"http";
-$url.="//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-$ref='';
-if(isset($_SERVER['HTTP_REFERER'])){
-	$ref=$_SERVER['HTTP_REFERER'];
-}
-$sql="insert into visitor(browser_name,browser_version,type,os,url,ref) values('$browser_name','$browser_version','$type','$os','$url','$ref')";
-mysqli_query($con,$sql);									
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
 <style>
-.divcol
-{
-	border:2px solid white;
-	background-color:white;
-	color:black;
-	float:right;
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  background-color: DodgerBlue;
 }
-select.ht__select {
-	background-color:darkgrey;
-	color: #0c0c0c;
-    width: auto;
-	border-radius:14px;
-	margin-left:6px;
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
 }
 </style>
-<form method="post" action="compare.php"> 
+</head>
+<body>
 <?php
 foreach($get_product as $list){
-?>
-  <div>
-   <?php $val=$list['id']?>
-    <input type="checkbox" id="12" name="checkArr[]" value="<?php echo $val ?>">
-    <label for="subscribeNews"><?php echo $list['name']?></label>
-  </div>
-
-<?php
+    $name1=$list['name'];
+    $name2=$list['name'];
 }
-?>
-<div>
-    <button type="submit" name="submit_checkbox">Subscribe</button>
-  </div>
-</form>
+    ?>
+<h1>Compare <?php echo $name1?> and <?php echo $name2?></h1>
 <div class="body__overlay"></div>
         
         
@@ -194,6 +112,7 @@ foreach($get_product as $list){
 				</div>
             </div>
         </section>
-        <!-- End Product Grid -->
-        <!-- End Banner Area -->
-<?php require('footer.php')?>        
+        
+
+</body>
+</html>

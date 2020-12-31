@@ -17,7 +17,7 @@ function get_safe_value($con,$str){
 	}
 }
 
-function get_product($con,$limit='',$cat_id='',$product_id='',$search_str='',$sort_order='',$is_best_seller=''){
+function get_product($con,$limit='',$cat_id='',$product_id='',$search_str='',$sort_order='',$is_best_seller='',$id1='',$id2=''){
 	$sql="select product.*,categories.categories from product,categories where product.status=1 ";
 	if($cat_id!=''){
 		$sql.=" and product.categories_id=$cat_id ";
@@ -25,6 +25,10 @@ function get_product($con,$limit='',$cat_id='',$product_id='',$search_str='',$so
 	if($product_id!=''){
 		$sql.=" and product.id=$product_id ";
 	}
+	if($id1!='' and $id2!=''){
+		$sql.=" and product.id in($id1,$id2) ";
+	}
+	
 	if($is_best_seller!=''){
 		$sql.=" and product.best_seller=1 ";
 	}

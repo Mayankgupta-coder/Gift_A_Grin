@@ -130,6 +130,17 @@ if(isset($_GET['id'])){
                         <!-- End List And Grid View -->
                     </div>
                 </div>
+                <?php
+                if(isset($_GET['id'])){
+                    $pid=$_GET['id'];
+                $sql="select image from images where product_id='$pid'";
+		$result=mysqli_query($con,$sql);
+        while($row=mysqli_fetch_assoc($result)){?>
+            <a href="<?php echo 'admin/'.'uploads/'.$row['image'];?>"><img class="mymulimg" src="<?php echo 'admin/'.'uploads/'.$row['image'];?>"width="300" height="300"/></a>
+            <?php
+        }
+    }
+        ?>
                 <div class="row">
                     <div class="col-xs-12">
                     
